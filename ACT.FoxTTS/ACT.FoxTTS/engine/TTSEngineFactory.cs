@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ACT.FoxCommon.localization;
 using ACT.FoxTTS.engine.baidu;
+using ACT.FoxTTS.engine.ai_cloud;
 using ACT.FoxTTS.localization;
 
 namespace ACT.FoxTTS.engine
@@ -23,15 +24,17 @@ namespace ACT.FoxTTS.engine
 
     class TTSEngineFactory
     {
-        public static TTSEngineDef[] Engines = {new TTSEngineDef("ttsEngineBaidu"), };
+        public static TTSEngineDef[] Engines = {new TTSEngineDef("ttsEngineBaidu"), new TTSEngineDef("ttsEngineAiCloud")};
 
         public static ITTSEngine CreateEngine(string engine)
         {
             switch (engine)
             {
                 case "ttsEngineBaidu":
-                default:
                     return new BaiduTTSEngine();
+                case "ttsEngineAiCloud":
+                default:
+                    return new AiCloudEngine();
             }
         }
     }

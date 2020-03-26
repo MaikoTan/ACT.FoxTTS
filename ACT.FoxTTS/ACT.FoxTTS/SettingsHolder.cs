@@ -2,6 +2,7 @@
 using System.Xml.Serialization;
 using ACT.FoxCommon.core;
 using ACT.FoxTTS.engine.baidu;
+using ACT.FoxTTS.engine.ai_cloud;
 using Advanced_Combat_Tracker;
 
 namespace ACT.FoxTTS
@@ -15,6 +16,7 @@ namespace ACT.FoxTTS
 
         public PlaybackSettings Playback = new PlaybackSettings();
         public BaiduTTSSettings BaiduTtsSettings = new BaiduTTSSettings();
+        public AiCloudSettings AiCloudTtsSettings = new AiCloudSettings();
 
         public PluginSettings(object ParentSettingsClass) : base(ParentSettingsClass)
         {
@@ -117,6 +119,8 @@ namespace ACT.FoxTTS
         public PlaybackSettings PlaybackSettings => Settings.Playback;
 
         public BaiduTTSSettings BaiduTtsSettings => Settings.BaiduTtsSettings;
+
+        public AiCloudSettings AiCloudTtsSettings => Settings.AiCloudTtsSettings;
 
         public string TTSEngine { get; set; }
         
