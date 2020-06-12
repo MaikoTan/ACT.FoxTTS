@@ -156,6 +156,9 @@
   <data name="checkBoxNotifyStableOnly" xml:space="preserve">
     <value>只提示稳定版更新</value>
   </data>
+  <data name="checkBoxUseHttps" xml:space="preserve">
+    <value>使用 HTTPS</value>
+  </data>
   <data name="groupBoxIntegration" xml:space="preserve">
     <value>插件集成</value>
   </data>
@@ -201,11 +204,11 @@
   <data name="labelPitch" xml:space="preserve">
     <value>音调:</value>
   </data>
+  <data name="labelPlaybackApi" xml:space="preserve">
+    <value>回放 API:</value>
+  </data>
   <data name="labelPlaybackDevice" xml:space="preserve">
     <value>输出设备:</value>
-  </data>
-  <data name="labelPlaybackMethod" xml:space="preserve">
-    <value>回放 API:</value>
   </data>
   <data name="labelSecretKey" xml:space="preserve">
     <value>Secret Key:</value>
@@ -261,6 +264,9 @@
   <data name="radioButtonPlaybackACT" xml:space="preserve">
     <value>使用 ACT 的设置进行回放</value>
   </data>
+  <data name="radioButtonPlaybackBuiltIn" xml:space="preserve">
+    <value>使用内置回放 API</value>
+  </data>
   <data name="radioButtonPlaybackYukkuri" xml:space="preserve">
     <value>使用 TTSYukkuri 的设置进行回放</value>
   </data>
@@ -295,6 +301,9 @@
   </data>
   <data name="ttsEngineBaidu" xml:space="preserve">
     <value>百度语音</value>
+  </data>
+  <data name="ttsEngineSAPI5" xml:space="preserve">
+    <value>系统自带 TTS</value>
   </data>
   <data name="updateChecking" xml:space="preserve">
     <value>检查中...</value>

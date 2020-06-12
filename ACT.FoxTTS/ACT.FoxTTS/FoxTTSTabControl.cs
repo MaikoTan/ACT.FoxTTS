@@ -2,10 +2,12 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ACT.FoxCommon;
+using ACT.FoxCommon.dpi;
 using ACT.FoxCommon.localization;
 using ACT.FoxCommon.update;
 using ACT.FoxTTS.engine;
@@ -29,6 +31,8 @@ namespace ACT.FoxTTS
             comboBoxTTSEngine.ValueMember = nameof(TTSEngineDef.Name);
 
             labelCurrentVersionValue.Text = Assembly.GetCallingAssembly().GetName().Version.ToString();
+
+            this.AdjustForDpiScaling();
         }
 
         public void AttachToAct(FoxTTSPlugin plugin)
@@ -102,6 +106,11 @@ namespace ACT.FoxTTS
                 _plugin.UpdateChecker.CheckUpdate(false);
             }
 
+            comboBoxTTSEngine.SelectedItem =
+                TTSEngineFactory.Engines.FirstOrDefault(it => it.Name.Equals(_plugin.Settings.TTSEngine)) ??
+                TTSEngineFactory.Engines.First();
+            comboBoxTTSEngine.SelectedIndexChanged += comboBoxTTSEngine_SelectedIndexChanged;
+
             switch (_plugin.Settings.PluginIntegration)
             {
                 case PluginIntegration.Act:
@@ -126,15 +135,22 @@ namespace ACT.FoxTTS
                 case PlaybackMethod.Act:
                     radioButtonPlaybackACT.Checked = true;
                     break;
-                default:
                 case PlaybackMethod.Yukkuri:
                     radioButtonPlaybackYukkuri.Checked = true;
                     break;
+                default:
+                case PlaybackMethod.BuiltIn:
+                    radioButtonPlaybackBuiltIn.Checked = true;
+                    break;
             }
+            comboBoxPlaybackApi.SelectedIndex = (int) playbackSettings.Api;
             radioButtonPlaybackACT.CheckedChanged += OnPlaybackValueChanged;
             radioButtonPlaybackYukkuri.CheckedChanged += OnPlaybackValueChanged;
+            radioButtonPlaybackBuiltIn.CheckedChanged += OnPlaybackValueChanged;
             trackBarMasterVolume.ValueChanged += OnPlaybackValueChanged;
+            comboBoxPlaybackApi.SelectedIndexChanged += OnPlaybackValueChanged;
 
+            comboBoxTTSEngine_SelectedIndexChanged(null, EventArgs.Empty);
             OnPluginIntegrationValueChanged(null, EventArgs.Empty);
             OnPlaybackValueChanged(null, EventArgs.Empty);
         }
@@ -206,7 +222,7 @@ namespace ACT.FoxTTS
                 return;
             }
 
-            comboBoxPlaybackMethod.SelectedValue = engine;
+            comboBoxPlaybackApi.SelectedValue = engine;
         }
 
         private PublishVersion IsNewVersion(PublishVersion newVersion)
@@ -357,17 +373,27 @@ namespace ACT.FoxTTS
                 settings.Method = PlaybackMethod.Act;
 
                 trackBarMasterVolume.Enabled = true;
-                comboBoxPlaybackMethod.Enabled = false;
+                comboBoxPlaybackApi.Enabled = false;
                 comboBoxPlaybackDevice.Enabled = false;
             }
-            else
+            else if (radioButtonPlaybackYukkuri.Checked)
             {
                 settings.Method = PlaybackMethod.Yukkuri;
 
                 trackBarMasterVolume.Enabled = false;
-                comboBoxPlaybackMethod.Enabled = false;
+                comboBoxPlaybackApi.Enabled = false;
                 comboBoxPlaybackDevice.Enabled = false;
             }
+            else
+            {
+                settings.Method = PlaybackMethod.BuiltIn;
+
+                trackBarMasterVolume.Enabled = false;
+                comboBoxPlaybackApi.Enabled = true;
+                comboBoxPlaybackDevice.Enabled = false;
+            }
+
+            settings.Api = (PlaybackApi) comboBoxPlaybackApi.SelectedIndex;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using ACT.FoxCommon;
+using ACT.FoxCommon.dpi;
 using ACT.FoxCommon.localization;
 
 namespace ACT.FoxTTS.engine.baidu
@@ -14,6 +15,8 @@ namespace ACT.FoxTTS.engine.baidu
         public BaiduTTSSettingsControl()
         {
             InitializeComponent();
+
+            this.AdjustForDpiScaling();
         }
 
         public void AttachToAct(FoxTTSPlugin plugin)
@@ -35,6 +38,7 @@ namespace ACT.FoxTTS.engine.baidu
             trackBarPitch.SetValue(settings.Pitch, 5);
             trackBarVolume.SetValue(settings.Volume, 5);
             comboBoxPerson.SelectedIndex = settings.Person.Clamp(0, comboBoxPerson.Items.Count - 1);
+            checkBoxUseHttps.Checked = settings.UseHttps;
 
             textBoxApiKey.TextChanged += OnValueChanged;
             textBoxSecretKey.TextChanged += OnValueChanged;
@@ -42,6 +46,7 @@ namespace ACT.FoxTTS.engine.baidu
             trackBarPitch.ValueChanged += OnValueChanged;
             trackBarVolume.ValueChanged += OnValueChanged;
             comboBoxPerson.SelectedIndexChanged += OnValueChanged;
+            checkBoxUseHttps.CheckedChanged += OnValueChanged;
 
             OnValueChanged(null, EventArgs.Empty);
         }
@@ -79,6 +84,8 @@ namespace ACT.FoxTTS.engine.baidu
             settings.Volume = trackBarVolume.Value;
 
             settings.Person = comboBoxPerson.SelectedIndex;
+
+            settings.UseHttps = checkBoxUseHttps.Checked;
         }
 
         private void linkLabelOpenBaiduReg_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -94,6 +101,7 @@ namespace ACT.FoxTTS.engine.baidu
             trackBarPitch.SetValue(5, 5);
             trackBarVolume.SetValue(5, 5);
             comboBoxPerson.SelectedIndex = 3;
+            checkBoxUseHttps.Checked = true;
         }
     }
 }

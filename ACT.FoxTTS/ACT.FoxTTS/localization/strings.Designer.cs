@@ -178,7 +178,16 @@ namespace ACT.FoxTTS.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 插件集成.
+        ///   查找类似 使用 HTTPS 的本地化字符串。
+        /// </summary>
+        internal static string checkBoxUseHttps {
+            get {
+                return ResourceManager.GetString("checkBoxUseHttps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件集成 的本地化字符串。
         /// </summary>
         internal static string groupBoxIntegration {
             get {
@@ -313,20 +322,20 @@ namespace ACT.FoxTTS.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 输出设备:.
+        ///   查找类似 回放 API: 的本地化字符串。
         /// </summary>
-        internal static string labelPlaybackDevice {
+        internal static string labelPlaybackApi {
             get {
-                return ResourceManager.GetString("labelPlaybackDevice", resourceCulture);
+                return ResourceManager.GetString("labelPlaybackApi", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 回放 API:.
+        ///   查找类似 输出设备: 的本地化字符串。
         /// </summary>
-        internal static string labelPlaybackMethod {
+        internal static string labelPlaybackDevice {
             get {
-                return ResourceManager.GetString("labelPlaybackMethod", resourceCulture);
+                return ResourceManager.GetString("labelPlaybackDevice", resourceCulture);
             }
         }
         
@@ -493,7 +502,16 @@ namespace ACT.FoxTTS.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 使用 TTSYukkuri 的设置进行回放.
+        ///   查找类似 使用内置回放 API 的本地化字符串。
+        /// </summary>
+        internal static string radioButtonPlaybackBuiltIn {
+            get {
+                return ResourceManager.GetString("radioButtonPlaybackBuiltIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 使用 TTSYukkuri 的设置进行回放 的本地化字符串。
         /// </summary>
         internal static string radioButtonPlaybackYukkuri {
             get {
@@ -588,7 +606,16 @@ namespace ACT.FoxTTS.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 检查中....
+        ///   查找类似 系统自带 TTS 的本地化字符串。
+        /// </summary>
+        internal static string ttsEngineSAPI5 {
+            get {
+                return ResourceManager.GetString("ttsEngineSAPI5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 检查中... 的本地化字符串。
         /// </summary>
         internal static string updateChecking {
             get {
