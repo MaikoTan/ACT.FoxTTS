@@ -24,17 +24,17 @@ namespace ACT.FoxTTS.engine
 
     class TTSEngineFactory
     {
-        public static TTSEngineDef[] Engines = {new TTSEngineDef("ttsEngineBaidu"), new TTSEngineDef("ttsEngineAiCloud")};
+        public static TTSEngineDef[] Engines = { new TTSEngineDef("ttsEngineAiCloud"), new TTSEngineDef("ttsEngineBaidu") };
 
         public static ITTSEngine CreateEngine(string engine)
         {
             switch (engine)
             {
-                case "ttsEngineBaidu":
-                    return new BaiduTTSEngine();
                 case "ttsEngineAiCloud":
                 default:
                     return new AiCloudEngine();
+                case "ttsEngineBaidu":
+                    return new BaiduTTSEngine();
             }
         }
     }

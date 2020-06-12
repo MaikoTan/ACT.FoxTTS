@@ -38,7 +38,7 @@ namespace ACT.FoxTTS.engine.ai_cloud
             trackBarSpeed.SetValue(settings.Speed, 10);
             trackBarPitch.SetValue(settings.Pitch, 10);
             trackBarVolume.SetValue(settings.Volume, 10);
-            comboBoxPerson.SelectedIndex = settings.Person.Clamp(0, 13);
+            comboBoxPerson.SelectedIndex = settings.Person.Clamp(0, comboBoxPerson.Items.Count - 1);
             txtBoxProxy.Text = settings.Proxy;
 
             trackBarSpeed.ValueChanged += OnValueChanged;

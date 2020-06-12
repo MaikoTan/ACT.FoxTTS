@@ -28,6 +28,7 @@ namespace ACT.FoxTTS
 
                 writer.Serialize(Playback);
                 writer.Serialize(BaiduTtsSettings);
+                writer.Serialize(AiCloudTtsSettings);
             };
 
             _settingsIo.ReadSettings = reader =>
@@ -42,6 +43,9 @@ namespace ACT.FoxTTS
                         break;
                     case nameof(BaiduTTSSettings):
                         BaiduTtsSettings = reader.Deserialize<BaiduTTSSettings>();
+                        break;
+                    case nameof(AiCloudSettings):
+                        AiCloudTtsSettings = reader.Deserialize<AiCloudSettings>();
                         break;
                 }
             };
