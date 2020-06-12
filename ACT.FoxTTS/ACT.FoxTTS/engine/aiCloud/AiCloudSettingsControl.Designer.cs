@@ -88,7 +88,10 @@
             "民安 ともえ",
             "月読 アイ",
             "月読 ショウタ",
-            "鷹の爪 吉田くん"});
+            "鷹の爪 吉田くん",
+            "ついなちゃん(標準語)",
+            "ついなちゃん(関西弁)",
+            "伊織弓鶴"});
             this.comboBoxPerson.Location = new System.Drawing.Point(72, 180);
             this.comboBoxPerson.Name = "comboBoxPerson";
             this.comboBoxPerson.Size = new System.Drawing.Size(420, 21);
