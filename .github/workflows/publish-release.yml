@@ -1,4 +1,4 @@
-name: Build artifact
+name: Publish Release
 
 on:
    workflow_dispatch:
