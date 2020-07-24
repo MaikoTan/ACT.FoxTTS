@@ -49,7 +49,7 @@ jobs:
     - name: Archive Release
       run: |
         Add-Type -assembly "system.io.compression.filesystem"
-        [io.compression.zipfile]::CreateFromDirectory(".\public\ACT.FoxTTS.dll", ".\public\release.zip") 
+        [io.compression.zipfile]::CreateFromDirectory(".\public", ".\public\release.zip") 
 
     - name: Create Release
       id: create_release
