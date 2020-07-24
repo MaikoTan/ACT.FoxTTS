@@ -187,6 +187,60 @@ namespace ACT.FoxTTS.localization {
         }
         
         /// <summary>
+        ///   查找类似 默认 的本地化字符串。
+        /// </summary>
+        internal static string comboBoxPitchDefault {
+            get {
+                return ResourceManager.GetString("comboBoxPitchDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 高 的本地化字符串。
+        /// </summary>
+        internal static string comboBoxPitchHigh {
+            get {
+                return ResourceManager.GetString("comboBoxPitchHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 低 的本地化字符串。
+        /// </summary>
+        internal static string comboBoxPitchLow {
+            get {
+                return ResourceManager.GetString("comboBoxPitchLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 中等 的本地化字符串。
+        /// </summary>
+        internal static string comboBoxPitchMedium {
+            get {
+                return ResourceManager.GetString("comboBoxPitchMedium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 非常高 的本地化字符串。
+        /// </summary>
+        internal static string comboBoxPitchXHigh {
+            get {
+                return ResourceManager.GetString("comboBoxPitchXHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 非常低 的本地化字符串。
+        /// </summary>
+        internal static string comboBoxPitchXLow {
+            get {
+                return ResourceManager.GetString("comboBoxPitchXLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 插件集成 的本地化字符串。
         /// </summary>
         internal static string groupBoxIntegration {
@@ -394,7 +448,16 @@ namespace ACT.FoxTTS.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 注册 API 密钥.
+        ///   查找类似 修复 Win10 TTS 人声列表 的本地化字符串。
+        /// </summary>
+        internal static string linkLabelCopyVoice {
+            get {
+                return ResourceManager.GetString("linkLabelCopyVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 注册 API 密钥 的本地化字符串。
         /// </summary>
         internal static string linkLabelOpenBaiduReg {
             get {
@@ -430,7 +493,18 @@ namespace ACT.FoxTTS.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 缓存已删除。.
+        ///   查找类似 你确定要修复 Win10 人声列表吗？
+        ///
+        ///该操作涉及修改系统注册表，可能导致的一切后果自负！ 的本地化字符串。
+        /// </summary>
+        internal static string messageAskCopyVoice {
+            get {
+                return ResourceManager.GetString("messageAskCopyVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 缓存已删除。 的本地化字符串。
         /// </summary>
         internal static string messageCacheCleared {
             get {
@@ -439,7 +513,28 @@ namespace ACT.FoxTTS.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 当前已是最新版！.
+        ///   查找类似 修复失败！详情请查看插件日志。 的本地化字符串。
+        /// </summary>
+        internal static string messageCopyVoiceFailed {
+            get {
+                return ResourceManager.GetString("messageCopyVoiceFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 修复成功！已更新 {0} 个人声：
+        ///{1}
+        ///
+        ///请重启 ACT 以生效。 的本地化字符串。
+        /// </summary>
+        internal static string messageCopyVoiceSuccess {
+            get {
+                return ResourceManager.GetString("messageCopyVoiceSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前已是最新版！ 的本地化字符串。
         /// </summary>
         internal static string messageLatest {
             get {
