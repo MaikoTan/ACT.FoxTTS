@@ -1,6 +1,10 @@
 name: Build artifact
 
-on: [push]
+on:
+  push:
+    paths:
+      - '!.github/**'
+      - '!./**.md'
 
 jobs:
   build:

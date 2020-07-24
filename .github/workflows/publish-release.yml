@@ -45,7 +45,12 @@ jobs:
       run: |
         mkdir -p ./publish
         cp ./ACT.FoxTTS/ACT.FoxTTS/bin/Release/ACT.FoxTTS.dll publish/
-        zip --junk-paths release ACT.FoxTTS.dll
+
+    - name: Archive Release
+      uses: thedoctor0/zip-release@master
+      with:
+        path: public/ACT.FoxTTS.dll
+        filename: 'release.zip'
 
     - name: Create Release
       id: create_release
