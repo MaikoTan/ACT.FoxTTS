@@ -43,12 +43,12 @@ jobs:
     - name: Generate artifact
       shell: bash
       run: |
-        mkdir -p ./publish
-        cp ./ACT.FoxTTS/ACT.FoxTTS/bin/Release/ACT.FoxTTS.dll publish/
+        mkdir -p ${{ secrets.GITHUB_WORKSPACE }}/publish
+        cp ./ACT.FoxTTS/ACT.FoxTTS/bin/Release/ACT.FoxTTS.dll ${{ secrets.GITHUB_WORKSPACE }}/publish/
 
     - name: Archive Release
       run: |
-        Compress-Archive -Path .\public\* -DestinationPath .\public\release.zip -Force
+        Compress-Archive -Path ${{ secrets.GITHUB_WORKSPACE }}\public\* -DestinationPath ${{ secrets.GITHUB_WORKSPACE }}\public\release.zip -Force
 
     - name: Create Release
       id: create_release
@@ -69,6 +69,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./public/release.zip
+        asset_path: ${{ secrets.GITHUB_WORKSPACE }}/public/release.zip
         asset_name: ACT.FoxTTS-release-${{ github.event.inputs.version }}.zip
         asset_content_type: application/zip
