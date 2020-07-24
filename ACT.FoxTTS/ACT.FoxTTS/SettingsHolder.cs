@@ -49,6 +49,7 @@ namespace ACT.FoxTTS
                         break;
                     case nameof(AiCloudSettings):
                         AiCloudTtsSettings = reader.Deserialize<AiCloudSettings>();
+                        break;
                     case nameof(SAPI5Settings):
                         SApi5Settings = reader.Deserialize<SAPI5Settings>();
                         break;

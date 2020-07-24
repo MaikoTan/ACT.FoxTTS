@@ -1,0 +1,53 @@
+name: Build artifact
+
+on:
+  push:
+    paths:
+      - '!.github/**'
+      - '!./**.md'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: '5.x'
+
+    - name: Set artifact name
+      shell: bash
+      run: |
+        sha=$(echo ${{ github.sha }} | cut -c 1-8)
+        echo "::set-env name=artifact_sha::$sha"
+
+    - name: Set up msbuild
+      uses: microsoft/setup-msbuild@v1.0.1
+
+    - name: Add Custom Problem Matcher
+      run: |
+        echo "::add-matcher::.github/matchers/msbuild.json"
+    
+    - name: NuGet restore
+      run: |
+        nuget restore .\ACT.FoxTTS\ACT.FoxTTS.sln
+
+    - name: MSBuild
+      run: msbuild /p:Configuration=Release /p:Platform="Any CPU" ACT.FoxTTS/ACT.FoxTTS.sln
+      shell: cmd
+
+    - name: Generate artifact
+      shell: bash
+      run: |
+        mkdir -p ./publish
+        cp ./ACT.FoxTTS/ACT.FoxTTS/bin/Release/ACT.FoxTTS.dll publish/
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ACT.FoxTTS-release-${{ env.artifact_sha }}
+        path: publish/
