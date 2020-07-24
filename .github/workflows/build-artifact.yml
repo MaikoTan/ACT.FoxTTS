@@ -27,9 +27,13 @@ jobs:
     - name: Add Custom Problem Matcher
       run: |
         echo "::add-matcher::.github/matchers/msbuild.json"
+    
+    - name: NuGet restore
+      run: |
+        nuget restore .\ACT.FoxTTS\ACT.FoxTTS.sln
 
     - name: MSBuild
-      run: msbuild /p:Configuration=Release /p:Platform=x64 ACT.FoxTTS/ACT.FoxTTS.sln
+      run: msbuild /p:Configuration=Release /p:Platform="Any CPU" ACT.FoxTTS/ACT.FoxTTS.sln
       shell: cmd
 
     - name: Generate artifact
