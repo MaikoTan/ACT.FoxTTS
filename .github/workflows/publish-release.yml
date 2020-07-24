@@ -47,10 +47,9 @@ jobs:
         cp ./ACT.FoxTTS/ACT.FoxTTS/bin/Release/ACT.FoxTTS.dll publish/
 
     - name: Archive Release
-      uses: thedoctor0/zip-release@master
-      with:
-        path: public/ACT.FoxTTS.dll
-        filename: 'release.zip'
+      run: |
+        Add-Type -assembly "system.io.compression.filesystem"
+        [io.compression.zipfile]::CreateFromDirectory(".\public\ACT.FoxTTS.dll", ".\public\release.zip") 
 
     - name: Create Release
       id: create_release
