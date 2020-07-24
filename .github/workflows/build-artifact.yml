@@ -45,5 +45,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ACT.FoxTTS-${{ env.artifact_sha }}
+        name: ACT.FoxTTS-release-${{ env.artifact_sha }}
         path: publish/
