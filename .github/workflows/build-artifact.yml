@@ -3,8 +3,8 @@ name: Build artifact
 on:
   push:
     paths:
-      - '!.github/**'
-      - '!./**.md'
+      - './ACT.FoxTTS/**'
+      - '.github/workflows/build-artifact.yml'
 
 jobs:
   build:
