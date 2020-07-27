@@ -1,7 +1,7 @@
 name: Publish Release
 
 on:
-   workflow_dispatch:
+  workflow_dispatch:
     inputs:
       version:
         description: 'version number in filename'
@@ -41,14 +41,13 @@ jobs:
       shell: cmd
 
     - name: Generate artifact
-      shell: bash
       run: |
-        mkdir -p publish
-        cp ./ACT.FoxTTS/ACT.FoxTTS/bin/Release/ACT.FoxTTS.dll publish/
+        New-Item -Type Directory -Name publish
+        Copy-Item -Path .\ACT.FoxTTS\ACT.FoxTTS\bin\Release\ACT.FoxTTS.dll -Destination .\publish -Force 
 
     - name: Archive Release
       run: |
-        Compress-Archive -Path publish\* -DestinationPath release.zip -Force
+        Compress-Archive -Path .\publish\* -DestinationPath release.zip -Force
 
     - name: Create Release
       id: create_release
