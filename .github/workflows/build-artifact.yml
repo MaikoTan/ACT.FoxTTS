@@ -3,7 +3,9 @@ name: Build artifact
 on:
   push:
     paths:
-      - './ACT.FoxTTS/**'
+      - 'ACT.FoxTTS/**'
+      - 'MSBuild.ILMerge.Task.targets'
+      - '.github/matchers/msbuild.json'
       - '.github/workflows/build-artifact.yml'
 
 jobs:
@@ -37,8 +39,10 @@ jobs:
         nuget restore .\ACT.FoxTTS\ACT.FoxTTS.sln
 
     - name: MSBuild
-      run: msbuild /p:Configuration=Release /p:Platform="Any CPU" ACT.FoxTTS/ACT.FoxTTS.sln
       shell: cmd
+      run: |
+        cp MSBuild.ILMerge.Task.targets .\ACT.FoxTTS\packages\MSBuild.ILMerge.Task.1.1.3\build\MSBuild.ILMerge.Task.targets
+        msbuild /p:Configuration=Release /p:Platform="Any CPU" ACT.FoxTTS/ACT.FoxTTS.sln
 
     - name: Generate artifact
       shell: bash
