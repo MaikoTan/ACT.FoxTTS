@@ -7,6 +7,17 @@ on:
       - 'MSBuild.ILMerge.Task.targets'
       - '.github/matchers/msbuild.json'
       - '.github/workflows/build-artifact.yml'
+  # 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'version number in filename'
+        required: true
+        default: ''
+      info:
+        description: 'explain what is changed'
+        required: true
+        default: ''
 
 jobs:
   build:
@@ -20,12 +31,6 @@ jobs:
     - uses: nuget/setup-nuget@v1
       with:
         nuget-version: '5.x'
-
-    - name: Set artifact name
-      shell: bash
-      run: |
-        sha=$(echo ${{ github.sha }} | cut -c 1-8)
-        echo "::set-env name=artifact_sha::$sha"
 
     - name: Set up msbuild
       uses: microsoft/setup-msbuild@v1.0.1
@@ -45,7 +50,6 @@ jobs:
         msbuild /p:Configuration=Release /p:Platform="Any CPU" ACT.FoxTTS/ACT.FoxTTS.sln
 
     - name: Generate artifact
-      shell: bash
       run: |
         mkdir -p ./publish
         cp ./ACT.FoxTTS/ACT.FoxTTS/bin/Release/ACT.FoxTTS.dll publish/
@@ -53,5 +57,55 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ACT.FoxTTS-release-${{ env.artifact_sha }}
+        name: ACT.FoxTTS-release
         path: publish/
+
+  publish:
+    runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    needs: [ build ]
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: ACT.FoxTTS-release
+        path: publish/
+
+    - name: Archive Release
+      run: |
+        zip -j release.zip ./publish/*
+        7z a release.7z ./publish/*
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ github.event.inputs.version }}
+        release_name: ${{ github.event.inputs.info }}
+        body: ''
+        draft: false
+        prerelease: true
+
+    - name: Upload Zip Release Asset
+      id: upload-release-asset-zip
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./release.zip
+        asset_name: ACT.FoxTTS-release-${{ github.event.inputs.version }}.zip
+        asset_content_type: application/zip
+
+    - name: Upload 7zip Release Asset
+      id: upload-release-asset-7z
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./release.7z
+        asset_name: ACT.FoxTTS-release-${{ github.event.inputs.version }}.7z
+        asset_content_type: application/x-7z-compressed
