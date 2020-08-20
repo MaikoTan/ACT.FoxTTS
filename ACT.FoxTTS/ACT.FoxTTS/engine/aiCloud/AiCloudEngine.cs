@@ -76,9 +76,9 @@ namespace ACT.FoxTTS.engine.ai_cloud
             var wave_origin = wave.Replace(".wav", ".origin.wav");
 
 
-            if (!File.Exists(wave))
+            lock (this)
             {
-                lock (this)
+                if (!File.Exists(wave))
                 {
                     _plugin.Controller.NotifyLogMessageAppend(false, $"Not found cache of 「{text}」, downloading");
 
