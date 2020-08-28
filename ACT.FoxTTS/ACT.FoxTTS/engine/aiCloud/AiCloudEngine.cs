@@ -78,34 +78,39 @@ namespace ACT.FoxTTS.engine.ai_cloud
       var wave_origin = wave.Replace(".wav", ".origin.wav");
 
 
-      lock (this)
+      if (!File.Exists(wave))
       {
-        if (!File.Exists(wave))
+        if (tasksMap.ContainsKey(text + option.GetString()))
         {
-          if (!tasksMap.ContainsKey(text + option.GetString()))
+          lock (this)
           {
-            var task = Task.Run(async () =>
-            {
-              string body = $"speaker_id={person}&text={WebUtility.UrlEncode(text)}&ext=wav&volume={(settings.Volume * 0.1).ToString()}&speed={(settings.Speed * 0.1).ToString()}&pitch={(settings.Pitch * 0.1).ToString()}&callback=callback";
-
-              string result = await DownLoadWaveManifest("https://cloud.ai-j.jp/demo/aitalk2webapi_nop.php", body, settings.Proxy);
-
-              if (!string.IsNullOrWhiteSpace(result))
-              {
-                var url = "https://" + result.Replace("callback({\"url\":\"\\/\\/", "").Replace("\"})", "").Replace("\\", "");
-
-                await DownloadWaveFile(url, wave_origin, settings.Proxy);
-              }
-              if (File.Exists(wave_origin))
-              {
-                new DemoParser(_plugin).Run(wave_origin, wave);
-              }
-
-              tasksMap.Remove(text + option.GetString());
-              _plugin.SoundPlayer.Play(wave, playDevice, isSync, volume);
-            });
-            tasksMap.Add(text + option.GetString(), task);
+            tasksMap.TryGetValue(text + option.GetString(), out Task task);
+            task?.GetAwaiter().GetResult();
+            _plugin.SoundPlayer.Play(wave, playDevice, isSync, volume);
           }
+        }
+        else
+        {
+          var task = Task.Run(async () =>
+          {
+            string body = $"speaker_id={person}&text={WebUtility.UrlEncode(text)}&ext=wav&volume={settings.Volume * 0.1}&speed={settings.Speed * 0.1}&pitch={settings.Pitch * 0.1}&callback=callback";
+
+            string result = await DownLoadWaveManifest("https://cloud.ai-j.jp/demo/aitalk2webapi_nop.php", body, settings.Proxy);
+
+            if (!string.IsNullOrWhiteSpace(result))
+            {
+              var url = "https://" + result.Replace("callback({\"url\":\"\\/\\/", "").Replace("\"})", "").Replace("\\", "");
+
+              await DownloadWaveFile(url, wave_origin, settings.Proxy);
+            }
+            if (File.Exists(wave_origin))
+            {
+              new DemoParser(_plugin).Run(wave_origin, wave);
+            }
+            tasksMap.Remove(text + option.GetString());
+            _plugin.SoundPlayer.Play(wave, playDevice, isSync, volume);
+          });
+          tasksMap.Add(text + option.GetString(), task);
         }
       }
       if (File.Exists(wave))
