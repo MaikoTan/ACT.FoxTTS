@@ -1,11 +1,7 @@
 name: Remove old artifacts
 
 on:
-  push:
-    paths:
-      - ".github/workflows/remove-old-artifact.yml"
-  schedule:
-    - cron: '0 15 * * *'
+  workflow_dispatch:
 
 jobs:
   remove-old-artifacts:
