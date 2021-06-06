@@ -74,49 +74,35 @@ namespace ACT.FoxTTS.engine.ai_cloud
       };
 
       // Calculate hash
-      var wave = this.GetCacheFileName(text.Replace(Environment.NewLine, "+"), "wav", option.GetString());
-      var wave_origin = wave.Replace(".wav", ".origin.wav");
-
-
-      if (!File.Exists(wave))
-      {
-        if (tasksMap.ContainsKey(text + option.GetString()))
+      var wave = _plugin.Cache.GetOrCreateFile(
+        this,
+        text.Replace(Environment.NewLine, "+"),
+        "wav",
+        option.GetString(),
+        async f =>
         {
-          lock (this)
+          var wave_origin = f.Replace(".wav", ".origin.wav");
+          string body = $"speaker_id={person}&text={WebUtility.UrlEncode(text)}&ext=wav&volume={settings.Volume * 0.1}&speed={settings.Speed * 0.1}&pitch={settings.Pitch * 0.1}&callback=callback";
+
+          string result = await DownLoadWaveManifest("https://cloud.ai-j.jp/demo/aitalk2webapi_nop.php", body, settings.Proxy);
+
+          if (!string.IsNullOrWhiteSpace(result))
           {
-            tasksMap.TryGetValue(text + option.GetString(), out Task task);
-            task?.GetAwaiter().GetResult();
-            _plugin.SoundPlayer.Play(wave, playDevice, isSync, volume);
+            var url = "https://" + result.Replace("callback({\"url\":\"\\/\\/", "").Replace("\"})", "").Replace("\\", "");
+
+            await DownloadWaveFile(url, wave_origin, settings.Proxy);
           }
-        }
-        else
-        {
-          var task = Task.Run(async () =>
+          if (File.Exists(wave_origin))
           {
-            string body = $"speaker_id={person}&text={WebUtility.UrlEncode(text)}&ext=wav&volume={settings.Volume * 0.1}&speed={settings.Speed * 0.1}&pitch={settings.Pitch * 0.1}&callback=callback";
-
-            string result = await DownLoadWaveManifest("https://cloud.ai-j.jp/demo/aitalk2webapi_nop.php", body, settings.Proxy);
-
-            if (!string.IsNullOrWhiteSpace(result))
-            {
-              var url = "https://" + result.Replace("callback({\"url\":\"\\/\\/", "").Replace("\"})", "").Replace("\\", "");
-
-              await DownloadWaveFile(url, wave_origin, settings.Proxy);
-            }
-            if (File.Exists(wave_origin))
-            {
-              new DemoParser(_plugin).Run(wave_origin, wave);
-            }
-            tasksMap.Remove(text + option.GetString());
-            _plugin.SoundPlayer.Play(wave, playDevice, isSync, volume);
-          });
-          tasksMap.Add(text + option.GetString(), task);
-        }
-      }
+            new DemoParser(_plugin).Run(wave_origin, f);
+          }
+          tasksMap.Remove(text + option.GetString());
+          _plugin.SoundPlayer.Play(f, playDevice, isSync, volume);
+          if (File.Exists(wave_origin))
+            File.Delete(wave_origin);
+        });
       if (File.Exists(wave))
       {
-        if (File.Exists(wave_origin))
-          File.Delete(wave_origin);
         _plugin.SoundPlayer.Play(wave, playDevice, isSync, volume);
       }
     }
