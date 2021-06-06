@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using ACT.FoxCommon;
 using ACT.FoxCommon.dpi;
 using ACT.FoxCommon.localization;
+using ACT.FoxTTS.localization;
 
 namespace ACT.FoxTTS.engine.baidu
 {
@@ -25,8 +26,7 @@ namespace ACT.FoxTTS.engine.baidu
 
             var parentPanel = plugin.EngineSettingsPanel;
             parentPanel.Controls.Add(this);
-            parentPanel.Resize += ParentPanelOnResize;
-            ParentPanelOnResize(parentPanel, null);
+            Dock = DockStyle.Top;
         }
 
         public void PostAttachToAct(FoxTTSPlugin plugin)
@@ -49,6 +49,8 @@ namespace ACT.FoxTTS.engine.baidu
             checkBoxUseHttps.CheckedChanged += OnValueChanged;
 
             OnValueChanged(null, EventArgs.Empty);
+
+            checkBoxApiKey_CheckedChanged(null, EventArgs.Empty);
         }
 
         public void RemoveFromAct()
@@ -59,12 +61,8 @@ namespace ACT.FoxTTS.engine.baidu
         public void DoLocalization()
         {
             LocalizationBase.TranslateControls(this);
-        }
-
-        private void ParentPanelOnResize(object sender, EventArgs eventArgs)
-        {
-            Location = new Point(0, 0);
-            Size = ((Control)sender).Size;
+            toolTip1.SetToolTip(checkBoxApiKey, strings.checkBoxApiKey_Tooltip);
+            toolTip1.SetToolTip(checkBoxSecretKey, strings.checkBoxSecretKey_Tooltip);
         }
 
         private void OnValueChanged(object sender, EventArgs eventArgs)
@@ -102,6 +100,12 @@ namespace ACT.FoxTTS.engine.baidu
             trackBarVolume.SetValue(5, 5);
             comboBoxPerson.SelectedIndex = 3;
             checkBoxUseHttps.Checked = true;
+        }
+
+        private void checkBoxApiKey_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxApiKey.PasswordChar = checkBoxApiKey.Checked ? '\0' : '*';
+            textBoxSecretKey.PasswordChar = checkBoxSecretKey.Checked ? '\0' : '*';
         }
     }
 }

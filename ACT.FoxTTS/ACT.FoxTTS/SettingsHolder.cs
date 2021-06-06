@@ -4,6 +4,7 @@ using ACT.FoxCommon.core;
 using ACT.FoxTTS.engine.baidu;
 using ACT.FoxTTS.engine.ai_cloud;
 using ACT.FoxTTS.engine.sapi5;
+using ACT.FoxTTS.preprocess;
 using Advanced_Combat_Tracker;
 
 namespace ACT.FoxTTS
@@ -16,6 +17,7 @@ namespace ACT.FoxTTS
         private readonly SettingsIO _settingsIo = new SettingsIO("ACT.FoxTTS");
 
         public PlaybackSettings Playback = new PlaybackSettings();
+        public PreProcessorSettings PreProcessorSettings = new PreProcessorSettings();
         public BaiduTTSSettings BaiduTtsSettings = new BaiduTTSSettings();
         public AiCloudSettings AiCloudTtsSettings = new AiCloudSettings();
         public SAPI5Settings SApi5Settings = new SAPI5Settings();
@@ -29,6 +31,7 @@ namespace ACT.FoxTTS
                 writer.WriteEndElement();
 
                 writer.Serialize(Playback);
+                writer.Serialize(PreProcessorSettings);
                 writer.Serialize(BaiduTtsSettings);
                 writer.Serialize(AiCloudTtsSettings);
                 writer.Serialize(SApi5Settings);
@@ -43,6 +46,9 @@ namespace ACT.FoxTTS
                         break;
                     case nameof(PlaybackSettings):
                         Playback = reader.Deserialize<PlaybackSettings>();
+                        break;
+                    case nameof(PreProcessorSettings):
+                        PreProcessorSettings = reader.Deserialize<PreProcessorSettings>();
                         break;
                     case nameof(BaiduTTSSettings):
                         BaiduTtsSettings = reader.Deserialize<BaiduTTSSettings>();
@@ -136,6 +142,8 @@ namespace ACT.FoxTTS
         public PluginIntegration PluginIntegration { get; set; } = PluginIntegration.Auto;
 
         public PlaybackSettings PlaybackSettings => Settings.Playback;
+
+        public PreProcessorSettings PreProcessorSettings => Settings.PreProcessorSettings;
 
         public BaiduTTSSettings BaiduTtsSettings => Settings.BaiduTtsSettings;
 

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using ACT.FoxCommon.core;
 using ACT.FoxTTS.engine;
 using ACT.FoxTTS.localization;
+using ACT.FoxTTS.preprocess;
 
 namespace ACT.FoxTTS
 {
@@ -15,8 +16,10 @@ namespace ACT.FoxTTS
         public Panel EngineSettingsPanel => SettingsTab.panelTTSEngineSettings;
         public Label StatusLabel { get; private set; }
         public FoxTTSTabControl SettingsTab { get; private set; }
+        public PreProcessor PreProcessor { get; } = new PreProcessor();
         public TTSInjector TtsInjector { get; } = new TTSInjector();
         public SoundPlayerWrapper SoundPlayer { get; } = new SoundPlayerWrapper();
+        public FileCache Cache { get; } = new FileCache();
 
         private ITTSEngine TtsEngine
         {
@@ -49,6 +52,7 @@ namespace ACT.FoxTTS
                 SettingsTab = new FoxTTSTabControl();
                 SettingsTab.AttachToAct(this);
 
+                PreProcessor.AttachToAct(this);
                 UpdateChecker.AttachToAct(this);
                 SoundPlayer.AttachToAct(this);
                 TtsInjector.AttachToAct(this);
@@ -57,6 +61,7 @@ namespace ACT.FoxTTS
 
                 Settings.PostAttachToAct(this);
                 SettingsTab.PostAttachToAct(this);
+                PreProcessor.PostAttachToAct(this);
                 UpdateChecker.PostAttachToAct(this);
                 SoundPlayer.PostAttachToAct(this);
                 TtsInjector.PostAttachToAct(this);
@@ -138,7 +143,8 @@ namespace ACT.FoxTTS
         {
             try
             {
-                TtsEngine?.Speak(text, playDevice, isSync, volume);
+                var processed = PreProcessor.Process(text);
+                TtsEngine?.Speak(processed, playDevice, isSync, volume);
             }
             catch (Exception ex)
             {

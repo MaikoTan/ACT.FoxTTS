@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBoxTTSEngineDetail = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelApiKey = new System.Windows.Forms.Label();
-            this.labelSecretKey = new System.Windows.Forms.Label();
             this.textBoxApiKey = new System.Windows.Forms.TextBox();
             this.textBoxSecretKey = new System.Windows.Forms.TextBox();
             this.labelSpeed = new System.Windows.Forms.Label();
@@ -48,6 +47,9 @@
             this.linkLabelOpenBaiduReg = new System.Windows.Forms.LinkLabel();
             this.linkLabelSetRecommend = new System.Windows.Forms.LinkLabel();
             this.checkBoxUseHttps = new System.Windows.Forms.CheckBox();
+            this.checkBoxApiKey = new System.Windows.Forms.CheckBox();
+            this.checkBoxSecretKey = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBoxTTSEngineDetail.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
@@ -57,25 +59,27 @@
             // 
             // groupBoxTTSEngineDetail
             // 
+            this.groupBoxTTSEngineDetail.AutoSize = true;
+            this.groupBoxTTSEngineDetail.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxTTSEngineDetail.Controls.Add(this.tableLayoutPanel1);
-            this.groupBoxTTSEngineDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxTTSEngineDetail.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxTTSEngineDetail.Location = new System.Drawing.Point(0, 0);
             this.groupBoxTTSEngineDetail.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxTTSEngineDetail.Name = "groupBoxTTSEngineDetail";
             this.groupBoxTTSEngineDetail.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBoxTTSEngineDetail.Size = new System.Drawing.Size(520, 451);
+            this.groupBoxTTSEngineDetail.Size = new System.Drawing.Size(250, 337);
             this.groupBoxTTSEngineDetail.TabIndex = 0;
             this.groupBoxTTSEngineDetail.TabStop = false;
             this.groupBoxTTSEngineDetail.Text = "Engine Detail";
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.labelApiKey, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelSecretKey, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBoxApiKey, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBoxSecretKey, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelSpeed, 0, 2);
@@ -92,11 +96,13 @@
             this.tableLayoutPanel1.Controls.Add(this.linkLabelOpenBaiduReg, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.linkLabelSetRecommend, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.checkBoxUseHttps, 0, 6);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxApiKey, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxSecretKey, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 16);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
+            this.tableLayoutPanel1.RowCount = 9;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -106,50 +112,27 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(516, 433);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(246, 319);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // labelApiKey
-            // 
-            this.labelApiKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelApiKey.AutoSize = true;
-            this.labelApiKey.Location = new System.Drawing.Point(2, 6);
-            this.labelApiKey.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelApiKey.Name = "labelApiKey";
-            this.labelApiKey.Size = new System.Drawing.Size(71, 12);
-            this.labelApiKey.TabIndex = 0;
-            this.labelApiKey.Text = "API Key:";
-            // 
-            // labelSecretKey
-            // 
-            this.labelSecretKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSecretKey.AutoSize = true;
-            this.labelSecretKey.Location = new System.Drawing.Point(2, 31);
-            this.labelSecretKey.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelSecretKey.Name = "labelSecretKey";
-            this.labelSecretKey.Size = new System.Drawing.Size(71, 12);
-            this.labelSecretKey.TabIndex = 1;
-            this.labelSecretKey.Text = "Secret Key:";
             // 
             // textBoxApiKey
             // 
             this.textBoxApiKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxApiKey, 2);
-            this.textBoxApiKey.Location = new System.Drawing.Point(77, 2);
+            this.textBoxApiKey.Location = new System.Drawing.Point(98, 2);
             this.textBoxApiKey.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxApiKey.Name = "textBoxApiKey";
-            this.textBoxApiKey.Size = new System.Drawing.Size(437, 21);
+            this.textBoxApiKey.Size = new System.Drawing.Size(146, 21);
             this.textBoxApiKey.TabIndex = 2;
             // 
             // textBoxSecretKey
             // 
             this.textBoxSecretKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxSecretKey, 2);
-            this.textBoxSecretKey.Location = new System.Drawing.Point(77, 27);
+            this.textBoxSecretKey.Location = new System.Drawing.Point(98, 27);
             this.textBoxSecretKey.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxSecretKey.Name = "textBoxSecretKey";
-            this.textBoxSecretKey.Size = new System.Drawing.Size(437, 21);
+            this.textBoxSecretKey.Size = new System.Drawing.Size(146, 21);
             this.textBoxSecretKey.TabIndex = 3;
             // 
             // labelSpeed
@@ -161,7 +144,7 @@
             this.labelSpeed.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelSpeed.Name = "labelSpeed";
             this.labelSpeed.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.labelSpeed.Size = new System.Drawing.Size(71, 22);
+            this.labelSpeed.Size = new System.Drawing.Size(92, 22);
             this.labelSpeed.TabIndex = 4;
             this.labelSpeed.Text = "Speed:";
             // 
@@ -174,7 +157,7 @@
             this.labelPitch.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPitch.Name = "labelPitch";
             this.labelPitch.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.labelPitch.Size = new System.Drawing.Size(71, 22);
+            this.labelPitch.Size = new System.Drawing.Size(92, 22);
             this.labelPitch.TabIndex = 5;
             this.labelPitch.Text = "Pitch:";
             // 
@@ -187,7 +170,7 @@
             this.labelVolume.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelVolume.Name = "labelVolume";
             this.labelVolume.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.labelVolume.Size = new System.Drawing.Size(71, 22);
+            this.labelVolume.Size = new System.Drawing.Size(92, 22);
             this.labelVolume.TabIndex = 6;
             this.labelVolume.Text = "Volume:";
             // 
@@ -198,40 +181,40 @@
             this.labelPerson.Location = new System.Drawing.Point(2, 203);
             this.labelPerson.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPerson.Name = "labelPerson";
-            this.labelPerson.Size = new System.Drawing.Size(71, 12);
+            this.labelPerson.Size = new System.Drawing.Size(92, 12);
             this.labelPerson.TabIndex = 7;
             this.labelPerson.Text = "Person:";
             // 
             // trackBarSpeed
             // 
             this.trackBarSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarSpeed.Location = new System.Drawing.Point(77, 52);
+            this.trackBarSpeed.Location = new System.Drawing.Point(98, 52);
             this.trackBarSpeed.Margin = new System.Windows.Forms.Padding(2);
             this.trackBarSpeed.Maximum = 9;
             this.trackBarSpeed.Name = "trackBarSpeed";
-            this.trackBarSpeed.Size = new System.Drawing.Size(411, 45);
+            this.trackBarSpeed.Size = new System.Drawing.Size(120, 45);
             this.trackBarSpeed.TabIndex = 8;
             this.trackBarSpeed.Value = 5;
             // 
             // trackBarPitch
             // 
             this.trackBarPitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarPitch.Location = new System.Drawing.Point(77, 101);
+            this.trackBarPitch.Location = new System.Drawing.Point(98, 101);
             this.trackBarPitch.Margin = new System.Windows.Forms.Padding(2);
             this.trackBarPitch.Maximum = 9;
             this.trackBarPitch.Name = "trackBarPitch";
-            this.trackBarPitch.Size = new System.Drawing.Size(411, 45);
+            this.trackBarPitch.Size = new System.Drawing.Size(120, 45);
             this.trackBarPitch.TabIndex = 9;
             this.trackBarPitch.Value = 5;
             // 
             // trackBarVolume
             // 
             this.trackBarVolume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarVolume.Location = new System.Drawing.Point(77, 150);
+            this.trackBarVolume.Location = new System.Drawing.Point(98, 150);
             this.trackBarVolume.Margin = new System.Windows.Forms.Padding(2);
             this.trackBarVolume.Maximum = 15;
             this.trackBarVolume.Name = "trackBarVolume";
-            this.trackBarVolume.Size = new System.Drawing.Size(411, 45);
+            this.trackBarVolume.Size = new System.Drawing.Size(120, 45);
             this.trackBarVolume.TabIndex = 10;
             this.trackBarVolume.Value = 5;
             // 
@@ -251,10 +234,10 @@
             "度小萌",
             "度米朵",
             "度小娇"});
-            this.comboBoxPerson.Location = new System.Drawing.Point(77, 199);
+            this.comboBoxPerson.Location = new System.Drawing.Point(98, 199);
             this.comboBoxPerson.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxPerson.Name = "comboBoxPerson";
-            this.comboBoxPerson.Size = new System.Drawing.Size(437, 20);
+            this.comboBoxPerson.Size = new System.Drawing.Size(146, 20);
             this.comboBoxPerson.TabIndex = 11;
             // 
             // labelSpeedValue
@@ -262,7 +245,7 @@
             this.labelSpeedValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSpeedValue.AutoSize = true;
-            this.labelSpeedValue.Location = new System.Drawing.Point(492, 50);
+            this.labelSpeedValue.Location = new System.Drawing.Point(222, 50);
             this.labelSpeedValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelSpeedValue.MinimumSize = new System.Drawing.Size(22, 0);
             this.labelSpeedValue.Name = "labelSpeedValue";
@@ -274,7 +257,7 @@
             // labelPitchValue
             // 
             this.labelPitchValue.AutoSize = true;
-            this.labelPitchValue.Location = new System.Drawing.Point(492, 99);
+            this.labelPitchValue.Location = new System.Drawing.Point(222, 99);
             this.labelPitchValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPitchValue.MinimumSize = new System.Drawing.Size(22, 0);
             this.labelPitchValue.Name = "labelPitchValue";
@@ -286,7 +269,7 @@
             // labelVolumeValue
             // 
             this.labelVolumeValue.AutoSize = true;
-            this.labelVolumeValue.Location = new System.Drawing.Point(492, 148);
+            this.labelVolumeValue.Location = new System.Drawing.Point(222, 148);
             this.labelVolumeValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelVolumeValue.MinimumSize = new System.Drawing.Size(22, 0);
             this.labelVolumeValue.Name = "labelVolumeValue";
@@ -301,9 +284,9 @@
             this.linkLabelOpenBaiduReg.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.linkLabelOpenBaiduReg, 3);
             this.linkLabelOpenBaiduReg.Location = new System.Drawing.Point(2, 297);
-            this.linkLabelOpenBaiduReg.Margin = new System.Windows.Forms.Padding(2, 15, 2, 0);
+            this.linkLabelOpenBaiduReg.Margin = new System.Windows.Forms.Padding(2, 15, 2, 10);
             this.linkLabelOpenBaiduReg.Name = "linkLabelOpenBaiduReg";
-            this.linkLabelOpenBaiduReg.Size = new System.Drawing.Size(512, 12);
+            this.linkLabelOpenBaiduReg.Size = new System.Drawing.Size(242, 12);
             this.linkLabelOpenBaiduReg.TabIndex = 15;
             this.linkLabelOpenBaiduReg.TabStop = true;
             this.linkLabelOpenBaiduReg.Text = "Register Your Own API Keys";
@@ -317,7 +300,7 @@
             this.linkLabelSetRecommend.Location = new System.Drawing.Point(2, 270);
             this.linkLabelSetRecommend.Margin = new System.Windows.Forms.Padding(2, 15, 2, 0);
             this.linkLabelSetRecommend.Name = "linkLabelSetRecommend";
-            this.linkLabelSetRecommend.Size = new System.Drawing.Size(512, 12);
+            this.linkLabelSetRecommend.Size = new System.Drawing.Size(242, 12);
             this.linkLabelSetRecommend.TabIndex = 16;
             this.linkLabelSetRecommend.TabStop = true;
             this.linkLabelSetRecommend.Text = "Set to Recommend";
@@ -331,27 +314,54 @@
             this.checkBoxUseHttps.Location = new System.Drawing.Point(3, 236);
             this.checkBoxUseHttps.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
             this.checkBoxUseHttps.Name = "checkBoxUseHttps";
-            this.checkBoxUseHttps.Size = new System.Drawing.Size(510, 16);
+            this.checkBoxUseHttps.Size = new System.Drawing.Size(240, 16);
             this.checkBoxUseHttps.TabIndex = 17;
             this.checkBoxUseHttps.Text = "Use HTTPS";
             this.checkBoxUseHttps.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxApiKey
+            // 
+            this.checkBoxApiKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBoxApiKey.AutoSize = true;
+            this.checkBoxApiKey.Location = new System.Drawing.Point(3, 4);
+            this.checkBoxApiKey.Name = "checkBoxApiKey";
+            this.checkBoxApiKey.Size = new System.Drawing.Size(90, 16);
+            this.checkBoxApiKey.TabIndex = 18;
+            this.checkBoxApiKey.Text = "API Key:";
+            this.checkBoxApiKey.UseVisualStyleBackColor = true;
+            this.checkBoxApiKey.CheckedChanged += new System.EventHandler(this.checkBoxApiKey_CheckedChanged);
+            // 
+            // checkBoxSecretKey
+            // 
+            this.checkBoxSecretKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBoxSecretKey.AutoSize = true;
+            this.checkBoxSecretKey.Location = new System.Drawing.Point(3, 29);
+            this.checkBoxSecretKey.Name = "checkBoxSecretKey";
+            this.checkBoxSecretKey.Size = new System.Drawing.Size(90, 16);
+            this.checkBoxSecretKey.TabIndex = 19;
+            this.checkBoxSecretKey.Text = "Secret Key:";
+            this.checkBoxSecretKey.UseVisualStyleBackColor = true;
+            this.checkBoxSecretKey.CheckedChanged += new System.EventHandler(this.checkBoxApiKey_CheckedChanged);
             // 
             // BaiduTTSSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.groupBoxTTSEngineDetail);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "BaiduTTSSettingsControl";
-            this.Size = new System.Drawing.Size(520, 451);
+            this.Size = new System.Drawing.Size(250, 337);
             this.groupBoxTTSEngineDetail.ResumeLayout(false);
+            this.groupBoxTTSEngineDetail.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPitch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -359,8 +369,6 @@
 
         private System.Windows.Forms.GroupBox groupBoxTTSEngineDetail;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label labelApiKey;
-        private System.Windows.Forms.Label labelSecretKey;
         private System.Windows.Forms.TextBox textBoxApiKey;
         private System.Windows.Forms.TextBox textBoxSecretKey;
         private System.Windows.Forms.Label labelSpeed;
@@ -377,5 +385,8 @@
         private System.Windows.Forms.LinkLabel linkLabelOpenBaiduReg;
         private System.Windows.Forms.LinkLabel linkLabelSetRecommend;
         private System.Windows.Forms.CheckBox checkBoxUseHttps;
+        private System.Windows.Forms.CheckBox checkBoxApiKey;
+        private System.Windows.Forms.CheckBox checkBoxSecretKey;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
