@@ -33,7 +33,7 @@ jobs:
         nuget-version: '5.x'
 
     - name: Set up msbuild
-      uses: microsoft/setup-msbuild@v1.0.1
+      uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Add Custom Problem Matcher
       run: |
